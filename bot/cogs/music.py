@@ -290,7 +290,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             embed.add_field(name="n!**skipto**",value="Use this to play the n'th track in queue.",inline=False)
             embed.add_field(name="n!**prev**",value="Use this to play the previous track in queue",inline=False)
             embed.add_field(name="n!**queue**",value="Use this to view the list of songs currently in the queue",inline=False)
-            embed.add_field(name="n!**loop**",value="Use **n!loop 1** to loop current song, **n!loop all** to loop whole queue, **n!loop none** to remove loop",inline=False) 
+            embed.add_field(name="n!**loop**",value="Use **n!loop curr** to loop current song, **n!loop full** to loop whole queue, **n!loop nil** to remove loop",inline=False) 
             embed.add_field(name="n!**nowp**",value="Use this to check which song is playing currently", inline=False)
             embed.add_field(name="n!**seek**",value="Use this to go to a specific timestamp in the audio file. E.g.: **n!seek 1:40**", inline=False)
             embed.add_field(name="n!**stop**",value="Use this to stop a song currently playing.This command also empties the queue.", inline=False)
