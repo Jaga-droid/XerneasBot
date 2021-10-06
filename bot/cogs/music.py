@@ -11,7 +11,7 @@ import discord
 import wavelink
 from discord.ext import commands
 
-URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
+URL_REGEX = r'https?://(?www\.)?.+'
 LYRICS_URL = "https://some-random-api.ml/lyrics?title="
 HZ_BANDS = (20, 40, 63, 100, 150, 250, 400, 450, 630, 1000, 1600, 2500, 4000, 10000, 16000)
 TIME_REGEX = r"([0-9]{1,2})[:ms](([0-9]{1,2})s?)?"
@@ -324,14 +324,14 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def start_nodes(self):
         await self.bot.wait_until_ready()
 
-        nodes = {
+         nodes = {
             "MAIN": {
-                "host": "india.lavalink.org",
-                "port": 2333,
-                "rest_uri": "http://india.lavalink.org:2333",
+                "host": "lava.link",
+                "port": 80,
+                "rest_uri": "http://lava.link:80",
                 "password": "youshallnotpass",
                 "identifier": "MAIN",
-                 
+                "region": "germany",
             }
         }
 
