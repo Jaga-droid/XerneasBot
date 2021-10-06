@@ -166,11 +166,11 @@ class Queue:
         self._queue.extend(upcoming)
 
     def set_repeat_mode(self, mode):
-        if mode == "none":
+        if mode == "nil":
             self.repeat_mode = RepeatMode.NONE
-        elif mode == "1":
+        elif mode == "curr":
             self.repeat_mode = RepeatMode.ONE
-        elif mode == "all":
+        elif mode == "full":
             self.repeat_mode = RepeatMode.ALL
 
     def empty(self):
@@ -467,7 +467,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="repeat", aliases=["loop"])
     async def repeat_command(self, ctx, mode: str):
-        if mode not in ("none", "cur", "all"):
+        if mode not in ("nil", "curr", "full"):
             raise InvalidRepeatMode
 
         player = self.get_player(ctx)
@@ -634,7 +634,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         elif isinstance(exc, EQGainOutOfBounds):
             await ctx.send("The EQ gain for any band should be between 10 dB and -10 dB.")
 
-    @commands.command(name="playing", aliases=["nowp"])
+    @commands.command(name="playing", aliases=["nowp","np"])
     async def playing_command(self, ctx):
         player = self.get_player(ctx)
 
