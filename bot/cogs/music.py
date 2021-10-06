@@ -207,11 +207,11 @@ class Player(wavelink.Player):
             self.queue.add(*tracks.tracks)
         elif len(tracks) == 1:
             self.queue.add(tracks[0])
-            await ctx.send(f"Added {tracks[0].title} to the queue.")
+            await ctx.send(f"Added to the queue:`{tracks[0].title}`")
         else:
             if (track := await self.choose_track(ctx, tracks)) is not None:
                 self.queue.add(track)
-                await ctx.send(f"Added {track.title} to the queue.")
+                await ctx.send(f"Added to the queue:`{track.title}`")
 
         if not self.is_playing and not self.queue.is_empty:
             await self.start_playback()
@@ -295,6 +295,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             embed.add_field(name="n!**lyrics**",value="LOLOLOLOLL, use this to get the lyrics of current song in the queue :rofl: :rofl:",inline=False)
             embed.add_field(name="n!**shuffle**",value="Use this to shuffle the list of songs currently in the queue",inline=False)
             embed.add_field(name="n!**volume**",value="Use **n!volume up** and **n!volume down**",inline=False)
+            embed.add_field(name='n!**givetea**,value="Use **n!givetea** to grant yourself access to the tea channel)
             embed.add_field(name="n!**eq**",value="Use **n!eq 'choice'** where __choice__ can be **['flat', 'boost', 'metal', or 'piano']**",inline=False)
             embed.add_field(name="n!**aeq**",value="This is an advanced equalizer. Usage involves **n!aeq __band_number__ __gain__ .**. Band number is [1-15] or (20, 40, 63, 100, 150, 250, 400, 450, 630, 1000, 1600, 2500, 4000, 10000, 16000). Gain is [-10,10] ",inline=False)
             embed.add_field(name="n!**dc**",value="Use this to make xerneas leave the vc",inline=False)   
@@ -465,7 +466,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="repeat", aliases=["loop"])
     async def repeat_command(self, ctx, mode: str):
-        if mode not in ("none", "1", "all"):
+        if mode not in ("none", "cur", "all"):
             raise InvalidRepeatMode
 
         player = self.get_player(ctx)
