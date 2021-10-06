@@ -295,7 +295,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             embed.add_field(name="n!**lyrics**",value="LOLOLOLOLL, use this to get the lyrics of current song in the queue :rofl: :rofl:",inline=False)
             embed.add_field(name="n!**shuffle**",value="Use this to shuffle the list of songs currently in the queue",inline=False)
             embed.add_field(name="n!**volume**",value="Use **n!volume up** and **n!volume down**",inline=False)
-            embed.add_field(name='n!**givetea**,value="Use **n!givetea** to grant yourself access to the tea channel)
+            embed.add_field(name="n!**givetea**",value="Use **n!givetea** to give yourself access to the tea channel",inline=False)
             embed.add_field(name="n!**eq**",value="Use **n!eq 'choice'** where __choice__ can be **['flat', 'boost', 'metal', or 'piano']**",inline=False)
             embed.add_field(name="n!**aeq**",value="This is an advanced equalizer. Usage involves **n!aeq __band_number__ __gain__ .**. Band number is [1-15] or (20, 40, 63, 100, 150, 250, 400, 450, 630, 1000, 1600, 2500, 4000, 10000, 16000). Gain is [-10,10] ",inline=False)
             embed.add_field(name="n!**dc**",value="Use this to make xerneas leave the vc",inline=False)   
