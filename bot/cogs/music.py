@@ -487,20 +487,17 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             colour=ctx.author.colour,
             timestamp=dt.datetime.utcnow()
         )
-        embed.set_author(name="Search Results")
+        qfull=player.queue.fullq
+        embed.set_author(name="Full Queue")
         embed.set_footer(text=f"Requested by {ctx.author.display_name}", icon_url=ctx.author.avatar_url)
         embed.add_field(
             name="Currently playing",
-            value=getattr(player.queue.current_track, "title", "No tracks currently playing."),
+            value="\n".join(
+                    f"**{i+1}.** {t.title}"
+                    for i, t in enumerate(qfull[:show]),
             inline=False
         )
-        if upcoming := player.queue.upcoming:
-            embed.add_field(
-                name="Next up",
-                value="\n".join(str(upcoming.index(t.title))+str(t.title)  for t in upcoming[:show]),
-                inline=False
-            )
-
+      
         msg = await ctx.send(embed=embed)
 
     @queue_command.error
