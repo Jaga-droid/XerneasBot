@@ -327,12 +327,12 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         await self.bot.wait_until_ready()
         nodes = {
             "MAIN": {
-                "host": "india.lavalink.org",
-                "port":2333,
-                "rest_uri": "http://india.lavalink.org:2333",
+                "host": "cope.darrennathanael.com",
+                "port":443,
+                "rest_uri": "http://cope.darrennathanael.com:443",
                 "password": "youshallnotpass",
                 "identifier": "MAIN",
-                "region": "india",
+                "region": "usa",
             }
         }
 
