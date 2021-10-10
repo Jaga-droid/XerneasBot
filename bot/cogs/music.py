@@ -487,7 +487,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             colour=ctx.author.colour,
             timestamp=dt.datetime.utcnow()
         )
-        qfull=player.queue.fullq
+        qfull=player.queue.fullq()
         embed.set_author(name="Full Queue")
         embed.set_footer(text=f"Requested by {ctx.author.display_name}", icon_url=ctx.author.avatar_url)
         embed.add_field(
