@@ -493,7 +493,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         embed.add_field(
             name="Currently playing",
             value="\n".join(
-                    f"**{i+1}.** {t.title}"
+                    f"**{i+1}.** {t.title}({t.length//60000}:{str(t.length%60).zfill(2)})"
                     for i, t in enumerate(qfull[:show]),
             inline=False
         )
