@@ -24,7 +24,7 @@ class MusicBot(commands.Bot):
         print("Running bot...")
         super().run(tok, reconnect=True)
 
-    async def clshutdown(self):
+    async def shutdown(self):
         print("Closing connection to Discord...")
         await super().close()
 
