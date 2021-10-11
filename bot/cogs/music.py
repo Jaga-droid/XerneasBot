@@ -495,7 +495,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             colour=ctx.author.colour,
             timestamp=dt.datetime.utcnow()
             )
-            embed.set_footer(text=f"Requested by {ctx.author.display_name}. PAGE {i} of {pages}", icon_url=ctx.author.avatar_url)
+            embed.set_footer(text=f"Requested by {ctx.author.display_name}. PAGE {i+1} of {pages}", icon_url=ctx.author.avatar_url)
             pagel.append(embed)
             j=j+10
         msg = await ctx.send(embed=pagel[0])
