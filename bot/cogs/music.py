@@ -524,7 +524,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
                 await msg.edit(embed = pages[k])
         
             try:
-                reaction, user = await client.wait_for('reaction_add', timeout = 30.0, check = check)
+                reaction, user = await client.wait_for('reaction_add', timeout = 40.0, check = check)
                 await msg.remove_reaction(reaction, user)
             except:
                 break
