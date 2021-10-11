@@ -5,7 +5,7 @@ import random
 import re
 import typing as t
 from enum import Enum
-
+import math 
 import aiohttp
 import discord
 import wavelink
@@ -479,28 +479,56 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     @commands.command(name="queue")
     async def queue_command(self, ctx, show: t.Optional[int] = 10):
         player = self.get_player(ctx)
-
         if player.queue.is_empty:
             raise QueueIsEmpty
-
-        embed = discord.Embed(
+        qlen=player.queue.length
+        pages=math.ceil(qlen/10)
+        qfull=player.queue.fullq
+        j=0
+        pagel=[]
+        for i in range(0,pages):
+            embed= discord.Embed(
             title="Queue",
-            description=f"Only a maximum of  {show} tracks will be shown",
+            description="\n".join(
+                    f"**{i+1}.** {t.title}({t.length//60000}:{str(t.length%60).zfill(2)})"
+                    for i, t in enumerate(qfull[j:j+show])),
             colour=ctx.author.colour,
             timestamp=dt.datetime.utcnow()
-        )
-        qfull=player.queue.fullq
-        embed.set_author(name="Full Queue")
-        embed.set_footer(text=f"Requested by {ctx.author.display_name}", icon_url=ctx.author.avatar_url)
-        embed.add_field(
-            name="Currently playing",
-            value="\n".join(
-                    f"**{i+1}.** {t.title}({t.length//60000}:{str(t.length%60).zfill(2)})"
-                    for i, t in enumerate(qfull[:show])),
-            inline=False
-        )
-      
-        msg = await ctx.send(embed=embed)
+            )
+            embed.set_footer(text=f"Requested by {ctx.author.display_name}. PAGE {i} of {pages}", icon_url=ctx.author.avatar_url)
+            pagel.append(embed)
+            j=j+10
+        msg = await ctx.send(embed=pagel[0])
+        await msg.add_reaction('⏮')
+        await msg.add_reaction('◀')
+        await msg.add_reaction('▶')
+        await msg.add_reaction('⏭')
+        def check(reaction, user):
+            return user == ctx.author
+        k = 0
+        reaction = None
+        while True:
+            if str(reaction) == '⏮':
+                k = 0
+                await message.edit(embed = pages[k])
+            elif str(reaction) == '◀':
+                if k > 0:
+                    k -= 1
+                    await message.edit(embed = pages[k])
+            elif str(reaction) == '▶':
+                if k < pages:
+                    k += 1
+                    await message.edit(embed = pages[k])
+            elif str(reaction) == '⏭':
+                k = pages-1
+                await message.edit(embed = pages[k])
+        
+            try:
+                reaction, user = await client.wait_for('reaction_add', timeout = 30.0, check = check)
+                await message.remove_reaction(reaction, user)
+            except:
+                break
+        await message.clear_reactions()
 
     @queue_command.error
     async def queue_command_error(self, ctx, exc):
