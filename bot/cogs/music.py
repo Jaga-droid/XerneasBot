@@ -510,25 +510,25 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         while True:
             if str(reaction) == '⏮':
                 k = 0
-                await message.edit(embed = pages[k])
+                await msg.edit(embed = pages[k])
             elif str(reaction) == '◀':
                 if k > 0:
                     k -= 1
-                    await message.edit(embed = pages[k])
+                    await msg.edit(embed = pages[k])
             elif str(reaction) == '▶':
                 if k < pages:
                     k += 1
-                    await message.edit(embed = pages[k])
+                    await msg.edit(embed = pages[k])
             elif str(reaction) == '⏭':
                 k = pages-1
-                await message.edit(embed = pages[k])
+                await msg.edit(embed = pages[k])
         
             try:
                 reaction, user = await client.wait_for('reaction_add', timeout = 30.0, check = check)
-                await message.remove_reaction(reaction, user)
+                await msg.remove_reaction(reaction, user)
             except:
                 break
-        await message.clear_reactions()
+        await msg.clear_reactions()
 
     @queue_command.error
     async def queue_command_error(self, ctx, exc):
