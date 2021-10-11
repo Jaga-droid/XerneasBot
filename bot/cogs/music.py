@@ -528,7 +528,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
                 await msg.remove_reaction(reaction, user)
             except:
                 break
-        await message.clear_reactions()
+        await msg.clear_reactions()
         
     @queue_command.error
     async def queue_command_error(self, ctx, exc):
